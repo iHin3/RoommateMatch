@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Preferences and Details Form</title>
+    <script type="text/javascript">
+        var labels=[['Never','Rarely','Sometimes','Often','Always'],['Deep Sleeper','Sound Sleeper','Average Sleeper','Light Sleeper','Very Light Sleeper'],['Very Early','Early','Average','Late','Very Late'],['Cold','Cool','Average','Warm','Hot'],['Disorganized','Scattered','Normal','Neat','Organized'],['No Guests','Ask first','Don\'t mind','Happy With Guests','Guests Over Often'],['Digital Only','Mostly Digital','Either','Mostly Physical','Physical Only']];
+        function labelChange(elem,labelID) {
+            document.getElementById(elem.getAttribute('id')+'Label').innerHTML=labels[labelID][parseInt(elem.value)];
+        }
+    </script>
+    <script type="text/javascript">
+    function GetURLParameter(sParam) {
+        let sPageURL = window.location.search.substring(1);
+        let sURLVariables = sPageURL.split('&');
+        for (let i = 0; i < sURLVariables.length; i++) {
+            let sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+    function decodeParameter(param) {
+        return decodeURIComponent(param.replace(/\+/g, ' '));
+    }
+    function applyWarningMessage(message){
+        var warningDiv=document.getElementById('warning');
+        warningDiv.innerText=message;
+        warningDiv.classList.add('warning');
+        warningDiv.classList.remove('hidden');
+
+    }
+
+    function setup(){
+        var warningMessage=GetURLParameter("warning");
+        if (warningMessage!=null) {
+            applyWarningMessage(decodeParameter(warningMessage));
+        }
+    }
+    </script>
+</head>
+
+
+<body onload="setup()">
+    <div class="hidden" id="warning"></div>
+    <div class="header">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h1>Preferences and Details Form</h1>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <form id="prefsForm" action="prefs" method="POST">
+        <input type="hidden" id="type" name="type" value="prefs">
+        <label for="bio">Tell people about yourself:</label><br>
+        <textarea form="prefsForm" name="bio" id ="bio" rows=5 cols=40 required></textarea><br><br>
+
+        <label for="prefGender">Preferred Gender:</label><br>
+        <label for="male"><input type="radio" id="male" name="prefGender" value="male">
+        Male</label><br/>
+        <label for="female"><input type="radio" id="female" name="prefGender" value="female">
+        Female</label><br>
+        <label for="other"><input type="radio" id="other" name="prefGender" value="other">
+        Other</label><br><br>
+
+        <label for="prefClassyear">Preferred Class Year:</label><br>
+        <input type="number" id="prefClassyear" name="prefClassyear" value="2024" class="textInput" required><br><br>
+
+        <label for="interests">What are your interests (Check all that apply):</label><br>
+        <input type="checkbox" id="gym" name="interests" value="gym">
+        <label for="gym">Gym</label><br/>
+        <input type="checkbox" id="videogames" name="interests" value="videogames">
+        <label for="videogames">Video Games</label><br>
+        <input type="checkbox" id="sports" name="interests" value="sports">
+        <label for="sports">Sports</label><br>
+        <input type="checkbox" id="hiking" name="interests" value="hiking">
+        <label for="hiking">Hiking</label><br>
+        <input type="checkbox" id="biking" name="interests" value="biking">
+        <label for="biking">Biking</label><br>
+        <input type="checkbox" id="movies" name="interests" value="movies">
+        <label for="movies">Movies</label><br>
+        <input type="checkbox" id="party" name="interests" value="party">
+        <label for="party">Partying</label><br>
+        <label for="other">Other:</label>
+        <input type="text" id="other" name="interests" placeholder="" class="textInput" ><br><br>
+
+        <label for="alcohol">How often do you drink?</label><br>
+        <input type="range" id="alcohol" name="alcohol" min="0" max="4" value="2" oninput="labelChange(this,0);"><br>
+        <label id="alcoholLabel" class="rangeLabel">Sometimes</label><br><br>
+
+        <label for="smoke">How often do you smoke?</label><br>
+        <input type="range" id="smoke" name="smoke" min="0" max="4" value="2" oninput="labelChange(this,0);"><br>
+        <label id="smokeLabel" class="rangeLabel">Sometimes</label><br><br>
+
+        <label for="sleep">How heavy of a sleeper are you?</label><br>
+        <input type="range" id="sleep" name="sleep" min="0" max="4" value="2" oninput="labelChange(this,1);"><br>
+        <label id="sleepLabel" class="rangeLabel">Average Sleeper</label><br><br>
+
+        <label for="wake">How early or late do you wake up?</label><br>
+        <input type="range" id="wake" name="wake" min="0" max="4" value="2" oninput="labelChange(this,2);"><br>
+        <label id="wakeLabel" class="rangeLabel">Average</label><br><br>
+
+        <label for="temp">What temperature do you prefer?</label><br>
+        <input type="range" id="temp" name="temp" min="0" max="4" value="2" oninput="labelChange(this,3);"><br>
+        <label id="tempLabel" class="rangeLabel">Average</label><br><br>
+
+        <label for="org">How organized are you?</label><br>
+        <input type="range" id="org" name="org" min="0" max="4" value="2" oninput="labelChange(this,4);"><br>
+        <label id="orgLabel" class="rangeLabel">Normal</label><br><br>
+
+        <label for="guests">How do you feel about guests?</label><br>
+        <input type="range" id="guests" name="guests" min="0" max="4" value="2" oninput="labelChange(this,5);"><br>
+        <label id="guestsLabel" class="rangeLabel">Don't mind</label><br><br>
+
+        <label for="comm">How do you prefer to communicate?</label><br>
+        <input type="range" id="comm" name="comm" min="0" max="4" value="2" oninput="labelChange(this,6);"><br>
+        <label id="commLabel" class="rangeLabel">Either</label><br><br>
+
+
+        <input type="submit" value="Submit" class="button">
+    </form>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>

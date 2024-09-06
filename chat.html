@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Conversation</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+        
+    function GetURLParameter(sParam) {
+        let sPageURL = window.location.search.substring(1);
+        let sURLVariables = sPageURL.split('&');
+        for (let i = 0; i < sURLVariables.length; i++) {
+            let sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+
+    
+
+    function setup(){
+        var name=GetURLParameter('name');
+        document.getElementById('chatPartner').innerText=name;
+    }
+    </script>
+</head>
+
+<body onload="setup()">
+    <div class="header">
+    <span>Now chatting with: <b><span id='chatPartner'></span></b></span>
+    <div id="chatBox"></div>
+
+    <div id="enterBox">
+        <input type="text" id="messageInput" placeholder="Type a message..." class="textInput">
+        <br/>
+        <a onclick="sendMessage()" class="button">Send</a>
+    </div>
+    </div>
+    <script src="chat.js"></script>
+
+</body>
+
+</html>

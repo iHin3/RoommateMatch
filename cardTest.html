@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+      body{
+    background: linear-gradient(90deg, rgba(255,0,0,0.5) 0%, rgba(255,0,0,0) 33%, rgba(255,255,255,1) 33%, rgba(255,255,255,1) 66%, rgba(0,255,0,0) 66%, rgba(0,255,0,0.5) 100%);
+      }
+    </style>
+    <script>
+    function unflip() {
+        var flipDiv = document.getElementById('static');
+        flipDiv.id = 'drag';
+        var flipHeadDiv = document.getElementById('staticHead');
+        flipHeadDiv.id = 'dragHead';
+        dragElement(flipDiv);
+        flipDiv.classList.remove("flip");
+    }
+
+    function flip() {
+        var flipDiv = document.getElementById('drag');
+        flipDiv.id = 'static';
+        var flipHeadDiv = document.getElementById('dragHead');
+        flipHeadDiv.id = 'staticHead';
+        undragElement(flipDiv);
+        flipDiv.classList.add("flip");
+    }
+
+    function Person(name, age, gender, id, school, year, bio, prefGender,prefClassyear,interests,other,alcohol,smoke,sleep,wake,temp,org,guests,comm) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.id = id;
+        this.school = school;
+        this.year = year;
+        this.bio = bio;
+        this.prefGender = prefGender;
+        this.prefClassyear = prefClassyear;
+        this.interests = interests;
+        this.other = other;
+        this.alcohol = alcohol;
+        this.smoke = smoke;
+        this.sleep = sleep;
+        this.wake = wake;
+        this.temp = temp;
+        this.org = org;
+        this.guests = guests;
+        this.comm = comm;
+    }
+
+    sampleNames = ['John', 'Jane', 'Bill', 'Emma'];
+    sampleAges = ['23', '25', '21', '20'];
+    sampleGenders = ['Male', 'Female', 'Male', 'Female'];
+    sampleIDs = ['0', '1', '2', '3'];
+    sampleSchools = ['Clemson University', 'Georgia Tech', 'Arizona State University', 'Auburn University'];
+    sampleYears = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+    sampleBios = ['Bio 4','Bio 3','Bio 2','Bio 1'];
+    samplePrefGenders = ['Male','Female','Male','Female'];
+    samplePrefClassyears = ['2028','2027','2026','2025'];
+    sampleInterests = ['Gym, Sports, Hiking','Movies, Partying, Gym','Video Games, Biking','Gym, Biking, Partying'];
+    sampleOthers = ['Cooking','Sewing','Music','Swimming'];
+    sampleAlcohols = ['Sometimes','Often','Always','Never'];
+    sampleSmokes = ['Never','Rarely','Sometimes','Never'];
+    sampleSleeps = ['Light Sleeper','Average Sleeper','Deep Sleeper','Very Light Sleeper'];
+    sampleWakes = ['Early','Average','Very Late','Very Early'];
+    sampleTemps = ['Hot','Cold','Warm','Cool'];
+    sampleOrgs = ['Disorganized','Organized','Normal','Scattered'];
+    sampleGuests = ['Guests Over Often','Don\'t mind','Ask first','No Guests'];
+    sampleComm = ['Digital Only','Physical Only','Either','Mostly Physical'];
+
+    people = [];
+
+    var currentPerson;
+
+    for (var i = 0; i < sampleNames.length; i++) {
+        people.push(new Person(sampleNames[i], sampleAges[i], sampleGenders[i], sampleIDs[i], sampleSchools[i], sampleYears[i], sampleBios[i], samplePrefGenders[i], samplePrefClassyears[i], sampleInterests[i], sampleOthers[i], sampleAlcohols[i], sampleSmokes[i], sampleSleeps[i], sampleWakes[i], sampleTemps[i], sampleOrgs[i], sampleGuests[i], sampleComm[i]));
+    }
+
+    function applyPerson() {
+        currentPerson = people.pop();
+        console.log(currentPerson);
+        document.getElementById('id').innerText = currentPerson.id;
+        document.getElementById('name').innerText = currentPerson.name;
+        document.getElementById('age').innerText = currentPerson.age;
+        document.getElementById('gender').innerText = currentPerson.gender;
+        document.getElementById('profile').setAttribute("src", "img/" + currentPerson.id + ".jpg");
+
+        document.getElementById('profileBack').setAttribute("src", "img/" + currentPerson.id + ".jpg");
+        document.getElementById('nameBack').innerHTML =                     currentPerson.name;
+        document.getElementById('bio'+'Back').innerHTML =                   currentPerson.bio;
+        document.getElementById('ageBack').innerHTML = "<br/>"+             "<b>Age:</b> <br />"+currentPerson.age;
+        document.getElementById('genderBack').innerHTML = "<br/>"+          "<b>Gender:</b> <br />"+currentPerson.gender;
+        document.getElementById('schoolBack').innerHTML = "<br/>"+          "<b>School:</b> <br />"+currentPerson.school;
+        document.getElementById('yearBack').innerHTML = "<br/>"+            "<b>Current Year:</b> <br />"+currentPerson.year;
+        document.getElementById('prefGender'+'Back').innerHTML = "<br/>"+   "<b>Preferred Gender:</b> <br />"+currentPerson.prefGender;
+        document.getElementById('prefClassyear'+'Back').innerHTML = "<br/>"+"<b>Preferred Class Year:</b> <br />"+currentPerson.prefClassyear;
+        document.getElementById('interests'+'Back').innerHTML = "<br/>"+    "<b>Interests:</b> <br />"+currentPerson.interests+", "+currentPerson.other;
+        document.getElementById('alcohol'+'Back').innerHTML = "<br/>"+      "<b>Alcohol:</b> <br />"+currentPerson.alcohol;
+        document.getElementById('smoke'+'Back').innerHTML = "<br/>"+        "<b>Smoking:</b> <br />"+currentPerson.smoke;
+        document.getElementById('sleep'+'Back').innerHTML = "<br/>"+        "<b>Sleeper Type:</b> <br />"+currentPerson.sleep;
+        document.getElementById('wake'+'Back').innerHTML = "<br/>"+         "<b>Wake Time:</b> <br />"+currentPerson.wake;
+        document.getElementById('temp'+'Back').innerHTML = "<br/>"+         "<b>Temperature:</b> <br />"+currentPerson.temp;
+        document.getElementById('org'+'Back').innerHTML = "<br/>"+          "<b>Tidyness:</b> <br />"+currentPerson.org;
+        document.getElementById('guests'+'Back').innerHTML = "<br/>"+       "<b>Guests:</b> <br />"+currentPerson.guests;
+        document.getElementById('comm'+'Back').innerHTML = "<br/>"+         "<b>Communication:</b> <br />"+currentPerson.comm;
+    }
+
+
+    function GetURLParameter(sParam) {
+        let sPageURL = window.location.search.substring(1);
+        let sURLVariables = sPageURL.split('&');
+        for (let i = 0; i < sURLVariables.length; i++) {
+            let sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+
+
+    function setup() {
+        // Make the DIV element draggable:
+        dragElement(document.getElementById("drag"));
+        applyPerson();
+    }
+
+
+    function undragElement(elmnt) {
+        if (document.getElementById(elmnt.id + "Head")) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById(elmnt.id + "Head").onmousedown = null;
+        } else {
+            // otherwise, move the DIV from anywhere inside the DIV: 
+            elmnt.onmousedown = null;
+        }
+    }
+
+
+    function dragElement(elmnt) {
+        var pos1 = 0,
+            pos2 = 0,
+            pos3 = 0,
+            pos4 = 0,
+            initialX = 0;
+        resetDragElement();
+        if (document.getElementById(elmnt.id + "Head")) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById(elmnt.id + "Head").onmousedown = dragMouseDown;
+        } else {
+            // otherwise, move the DIV from anywhere inside the DIV: 
+            elmnt.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            initialX = e.clientX;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+            if (initialX > pos3) {
+                console.log('low');
+                $.ajax({
+                  method: "POST",
+                  url: "swipe",
+                  data: { type: "swipe", id: currentPerson.id, swipe: "bad" }
+                })
+                  .done(function( msg ) {
+                    console.log( "Server response: " + msg );
+                });
+                resetDragElement();
+                applyPerson();
+            }
+            else if (initialX < pos3) {
+                console.log('hi');
+                $.ajax({
+                  method: "POST",
+                  url: "swipe",
+                  data: { type: "swipe", id: currentPerson.id, swipe: "good" }
+                })
+                  .done(function( msg ) {
+                    console.log( "Server response: " + msg );
+                });
+                resetDragElement();
+                applyPerson();
+            }
+        }
+
+        function resetDragElement() {
+            initialX = window.innerWidth / 19;
+            pos2 = (window.innerHeight / 6); //-elmnt.offsetTop;
+            pos1 = (window.innerWidth / 19); //-elmnt.offsetLeft;
+            elmnt.style.top = (pos2) + "px";
+            elmnt.style.left = (pos1) + "px";
+
+        }
+    }
+    </script>
+</head>
+
+<body onload="setup()">
+    <!-- <header class="header">
+</header> -->
+    <div id="drag" class="flip-card">
+        <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+        <div id="dragHead" class="flip-card-inner">
+            <div class="flip-card-front">
+                <img id="profile"></img>
+                <div class="hidden" id="id"></div>
+                <h1 id="name">Name</h1>
+                <h1 id="gender">Gender</h1>
+                <h1 id="age">Age</h1>
+                <button onclick="flip()" class="altButton"><br/>View Profile</p>
+            </div>
+            <div class="flip-card-back">
+                <img id="profileBack"></img>
+                <h1 id="nameBack">Name</h1>
+                <h1 id="bioBack">Bio</h1>
+                <div class="backCardPrefs">
+                  <ul class="backCardPrefBlock">
+                    <li class="backCardPrefItems" id="genderBack">Gender</li>
+                    <li class="backCardPrefItems" id="ageBack">Age</li>
+                    <li class="backCardPrefItems" id="schoolBack">School</li>
+                    <li class="backCardPrefItems" id="yearBack">Year</li>
+                    <li class="backCardPrefItems" id="prefGenderBack">Pref Gender</li>
+                    <li class="backCardPrefItems" id="prefClassyearBack">Pref Year</li>
+                    <li class="backCardPrefItems" id="interestsBack">Interests</li>
+                    <li class="backCardPrefItems" id="alcoholBack">Alcohol</li>
+                    <li class="backCardPrefItems" id="smokeBack">Smoke</li>
+                    <li class="backCardPrefItems" id="sleepBack">Sleep</li>
+                    <li class="backCardPrefItems" id="wakeBack">Wake</li>
+                    <li class="backCardPrefItems" id="tempBack">Temp</li>
+                    <li class="backCardPrefItems" id="orgBack">Org</li>
+                    <li class="backCardPrefItems" id="guestsBack">Guests</li>
+                    <li class="backCardPrefItems" id="commBack">Comm</li>
+                  </ul>
+                </div>
+                <div class="backCardPrefs">
+                  <ul class="backCardPrefBlock">
+                    <li class="backCardButtonItems">
+                      <button onclick="unflip()" class="altButton">Back</button>
+                    </li>
+                    <li class="backCardButtonItems">
+                      <button onclick="location.href='chat.html?name='+document.getElementById('name').innerText;" class="altButton">Chat</button>
+                    </li>
+                  </ul>
+                </div>
+                  <br /><br /><br />
+            </div>
+        </div>
+    </div>
+    <br />
+    <!--<img class="padding" src="" style="min-height:400px;display: block;margin-left: auto;margin-right: auto;width: 50%;"/>-->
+    <br />
+    <textarea style="display:none; visibility:hidden"></textarea>
+</body>
+
+</html>

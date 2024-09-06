@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+    <script type="text/javascript">
+    function GetURLParameter(sParam) {
+        let sPageURL = window.location.search.substring(1);
+        let sURLVariables = sPageURL.split('&');
+        for (let i = 0; i < sURLVariables.length; i++) {
+            let sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+    function decodeParameter(param) {
+        return decodeURIComponent(param.replace(/\+/g, ' '));
+    }
+    function applyWarningMessage(message){
+        var warningDiv=document.getElementById('warning');
+        warningDiv.innerText=message;
+        warningDiv.classList.add('warning');
+        warningDiv.classList.remove('hidden');
+
+    }
+
+    function setup(){
+        var warningMessage=GetURLParameter("warning");
+        if (warningMessage!=null) {
+            applyWarningMessage(decodeParameter(warningMessage));
+        }
+    }
+    </script>
+</head>
+
+
+<body onload="setup()">
+    <div class="hidden" id="warning"></div>
+    <div class="header">
+    <div class="header">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h1>Login</h1>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <form id="loginForm" action="login" method="POST">
+        <input type="hidden" id="type" name="type" value="login">
+        <label for="email1">Email:</label><br>
+        <input type="email" id="email1" name="email1" class="textInput" required><br><br>
+        <label for="password1">Password:</label><br>
+        <input type="password" id="password1" name="password1" class="textInput" required><br><br>
+        <input type="submit" value="Login" class="button">
+    </form>
+    </div>
+</body>
+</html>
